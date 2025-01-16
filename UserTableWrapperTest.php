@@ -8,7 +8,7 @@ use PHPUnit\Framework\TestCase;
 
 class UserTableWrapperTest extends TestCase
 {
-    public function providerInsert()
+    public static function providerInsert()
     {
         return [
             [['name' => 'Alice', 'email' => 'alice@example.com']],
@@ -16,7 +16,7 @@ class UserTableWrapperTest extends TestCase
         ];
     }
 
-    public function providerUpdate()
+    public static function providerUpdate()
     {
         return [
             [0, ['name' => 'Alice Updated', 'email' => 'alice_updated@example.com']],
@@ -24,7 +24,7 @@ class UserTableWrapperTest extends TestCase
         ];
     }
 
-    public function providerDelete()
+    public static function providerDelete()
     {
         return [
             [0],
@@ -51,7 +51,7 @@ class UserTableWrapperTest extends TestCase
         $table->insert(['name' => 'Bob', 'email' => 'bob@example.com']);
         
         $updatedRow = $table->update($id, $values);
-        $this->assertEquals($values, $updatedRow);
+        $this->assertEquals(array_merge(['name' => '', 'email' => ''], $values), $updatedRow);
     }
 
     /**
